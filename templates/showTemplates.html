@@ -1,0 +1,19 @@
+{%extends 'partials/navbar.html'%}
+{% load static %}
+{%block content%}
+<div class="container jumbotron">
+
+    {%if totalResumes%}
+
+    {% for i in totalResumes %}
+                
+
+        <a href="{%url 'selectTemplate' i.id tokenRec %}">          <img src="{{i.image.url}}" alt="ass" height="300px" width="300px" ></a>  
+
+
+    {%endfor%}
+    {%endif%}
+
+
+</div>
+{%endblock%}

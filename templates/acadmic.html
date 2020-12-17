@@ -1,0 +1,85 @@
+{%extends 'partials/navbar.html'%}
+{%block content%}
+
+<div class="container jumbotron">
+    
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  ADD ACADMIC
+</button>
+<div class="container">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ADD ACADMIC</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  action="{%url 'addAcadmic' tokenRec%}" method="POST">
+        {%csrf_token%}
+      <div class="modal-body">
+          
+              <div class="form-group">
+                <label for="exampleInputEmail1"></label>
+                <input type="text" class="form-control" name ='institutionName' placeholder="institutionName" id="exampleInputEmail1" aria-describedby="emailHelp">
+                
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1"></label>
+                <input type="text" class="form-control" name ='degreeType' placeholder="degreeType" id="exampleInputEmail1" aria-describedby="emailHelp">
+                
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1"></label>
+                <input type="text" class="form-control" name ='degreeName' placeholder="degreeName" id="exampleInputEmail1" aria-describedby="emailHelp">
+                
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1"></label>
+                <input type="date" class="form-control" name ='startingDate' placeholder="startingDate" id="exampleInputEmail1" aria-describedby="emailHelp">
+                
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1"></label>
+                <input type="date" class="form-control" name ='endingDate' placeholder="endingDate" id="exampleInputEmail1" aria-describedby="emailHelp">
+                
+              </div>
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create Resume</button>
+      </div>
+  </form>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+{%if acadmics%}
+
+<div class="row">
+    {%for i in acadmics%}
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{i.institutionName}}</h5>
+          <p class="card-text">{{i.degreeType}}</p>
+          
+          <a href="{%url 'workExp' tokenRec%}" class="btn btn-primary">Next -> WORKEX <Details></Details></a>
+        </div>
+      </div>
+    </div>
+   {%endfor%}
+  </div>
+{%else%}
+<h4>NO RESUME PLEASE CERATE ONE</h4>
+{%endif%}
+</div>
+{%endblock%}

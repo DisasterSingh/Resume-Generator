@@ -1,0 +1,67 @@
+{%extends "partials/navbar.html"%}
+{%block content%}
+<div class="container jumbotron">
+
+    
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Create a Resume
+  </button>
+  <div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Name Your Resume</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form  action="{%url 'resumeAuthor'%}" method="POST">
+          {%csrf_token%}
+        <div class="modal-body">
+            
+                <div class="form-group">
+                  <label for="exampleInputEmail1"></label>
+                  <input type="text" class="form-control" name ='resumeName' placeholder="Myresume, etc etc" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <small id="emailHelp" class="form-text text-muted">Make it Unique to make it memorable ..</small>
+                </div>
+               
+               
+              
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Create Resume</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+<br><br>
+{%if resumes%}
+
+<div class="row">
+    {%for i in resumes%}
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{i.resumeName}}</h5>
+          <p class="card-text">{{i.dateOfCreation}}</p>
+          
+          <a href="{%url 'acadmic' i.token %}" class="btn btn-primary">Next -> Acaemic <Details></Details></a>
+        </div>
+      </div>
+    </div>
+   {%endfor%}
+  </div>
+{%else%}
+<h4>NO RESUME PLEASE CERATE ONE</h4>
+{%endif%}
+</div>
+
+
+{%endblock%}
